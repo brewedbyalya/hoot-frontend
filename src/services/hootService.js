@@ -41,8 +41,57 @@ const create = async (formData) => {
   }
 }
 
+const createComment = async (formData, hootId) => {
+    const token = localStorage.getItem('token')
+    const res = await fetch(`${BASE_URL}/${hootId}/comments`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(formData)
+    })
+    const data = await res.json()
+    return data
+}
+
+const deleteHoot = async (hootId) => {
+  try {
+    const token = localStorage.getItem('token')
+    const res = await fetch(`${BASE_URL}/${hootId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    const data = await res.json()
+    return data
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+async function update(hootId, hootFormData) {
+  try {
+    const res = await fetch(`${BASE_URL}/${hootId}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(hootFormData),
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export {
   index,
   show,
   create,
+  createComment,
+  deleteHoot,
+  update,
 }

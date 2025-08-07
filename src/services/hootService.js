@@ -11,17 +11,38 @@ const index = async () => {
 }
 
 const show = async (hootId) => {
-try {
-    await fetch(`${BASE_URL}/${hootId}`)
-    const data= await res.json()
+  try {
+    const res = await fetch(`${BASE_URL}/${hootId}`)
+    const data = await res.json()
     return data
-}
-catch (err) {
+  } catch (err) {
     console.log(err)
+  }
 }
+
+const create = async (formData) => {
+  try {
+    const token = localStorage.getItem('token')
+
+    const res = await fetch(BASE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(formData)
+    })
+
+    const data = await res.json()
+    return data
+
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 export {
   index,
   show,
+  create,
 }

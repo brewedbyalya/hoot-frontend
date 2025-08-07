@@ -5,16 +5,16 @@ const HootList = (props) => {
   return (
     <main>
       <h1>Hoot List</h1>
-      {props.hoots.map((Hoot) => (
-        <Link key={Hoot._id} to={`/hoots/${Hoot._id}`}>
+      {props.hoots.map((hoot) => (
+        <Link key={hoot._id} to={`/hoots/${hoot._id}`}>
           <article>  
             <header>
-            <h2>{Hoot.title}</h2>
+            <h2>{hoot.title}</h2>
             <p>
-              {Hoot.author.username} posted on {new Date(Hoot.createdAt).toLocaleDateString()}
+              {hoot.author.username} posted on {new Date(hoot.createdAt).toLocaleDateString()}
             </p>
             </header>
-            <p>{Hoot.text}</p>
+            <p>{hoot.text}</p>
           </article>
         </Link>
       ))}

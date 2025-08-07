@@ -9,7 +9,9 @@ const HootDetails = () => {
   const [hoot, setHoot] = useState()
   
   useEffect(() => {
+    // fetch a single hoot
     const fetchHoot = async () => {
+      // call the hoot service
       const hootData = await hootService.show(hootId)
       setHoot(hootData)
     }
@@ -21,10 +23,10 @@ const HootDetails = () => {
   return (
     <main>
       <header>
-        <p>{Hoot.category.toUpperCase()}</p>
-        <h1>{Hoot.title}</h1>
+        <p>{hoot.category.toUpperCase()}</p>
+        <h1>{hoot.title}</h1>
         <p>
-          {Hoot.author.username} posted on {new Date(Hoot.createdAt).toLocaleDateString()}
+          {hoot.author.username} posted on {new Date(hoot.createdAt).toLocaleDateString()}
         </p>
       </header>
     </main>
